@@ -21,10 +21,10 @@ if (empty($_GET['id'])) {
 if (!empty($_POST)) {
     $alert = "";
     if (!empty($_POST['cantidad']) || !empty($_POST['precio']) || !empty($_POST['producto_id'])) {
-        $precio = $_POST['precio'];
-        $cantidad = $_POST['cantidad'];
+        $precio = floatval($_POST['precio']); // Convierte a número
+        $cantidad = intval($_POST['cantidad']); // Convierte a número
         $producto_id = $_GET['id'];
-        $total = $cantidad + $data_producto['existencia'];
+        $total = $cantidad + intval($data_producto['existencia']); // Convierte a número
         $query_insert = mysqli_query($conexion, "UPDATE producto SET existencia = $total WHERE codproducto = $id_producto");
         if ($query_insert) {
             $alert = '<div class="alert alert-success" role="alert">
